@@ -13,6 +13,11 @@ public class ShotEntity extends Entity {
 	/** True if this shot has been "used", i.e. its hit something */
 	private boolean used = false;
 	
+	//User u = new User(95);
+	//ScoreTracker tracker = new ScoreTracker(u);
+	
+	
+	
 	/**
 	 * Create a new shot from the player
 	 * 
@@ -38,9 +43,11 @@ public class ShotEntity extends Entity {
 		// proceed with normal move
 		super.move(delta);
 		
-		// if we shot off the screen, remove ourselfs
+		// if we shot off the screen, remove ourselves
 		if (y < -100) {
 			game.removeEntity(this);
+			
+			//tracker.recordScore(u,-1);		// nam105: Subtract point for miss
 		}
 	}
 	
@@ -62,6 +69,8 @@ public class ShotEntity extends Entity {
 			// remove the affected entities
 			game.removeEntity(this);
 			game.removeEntity(other);
+			
+			//tracker.recordScore(u, 1);		// nam105: Add point for hit
 			
 			// notify the game that the alien has been killed
 			game.notifyAlienKilled();

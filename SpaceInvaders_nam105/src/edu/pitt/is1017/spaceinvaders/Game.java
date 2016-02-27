@@ -30,6 +30,8 @@ import javax.swing.JPanel;
  * 
  * @author Kevin Glass
  */
+
+
 public class Game extends Canvas {
 	/** The stragey that allows us to use accelerate page flipping */
 	private BufferStrategy strategy;
@@ -63,10 +65,14 @@ public class Game extends Canvas {
 	/** True if game logic needs to be applied this loop, normally as a result of a game event */
 	private boolean logicRequiredThisLoop = false;
 	
+	public int userID;
+	
+	
 	/**
 	 * Construct our game and set it running.
 	 */
-	public Game() {
+	public Game(int userID) {
+		this.userID = userID;
 		// create a frame to contain our game
 		JFrame container = new JFrame("Space Invaders 101");
 		
@@ -182,14 +188,17 @@ public class Game extends Canvas {
 	public void notifyWin() {
 		message = "Well done! You Win!";
 		waitingForKeyPress = true;
+	
 	}
 	
 	/**
 	 * Notification that an alien has been killed
 	 */
 	public void notifyAlienKilled() {
-		// reduce the alient count, if there are none left, the player has won!
+		// reduce the alien count, if there are none left, the player has won!
 		alienCount--;
+		
+		
 		
 		if (alienCount == 0) {
 			notifyWin();
@@ -440,11 +449,12 @@ public class Game extends Canvas {
 	 * @param argv The arguments that are passed into our game
 	 */
 	public static void main(String argv[]) {
-		Game g =new Game();
+		//Game g =new Game();
 
 		// Start the main game loop, note: this method will not
 		// return until the game has finished running. Hence we are
 		// using the actual main thread to run the game.
-		g.gameLoop();
+		
+		//g.gameLoop();
 	}
 }

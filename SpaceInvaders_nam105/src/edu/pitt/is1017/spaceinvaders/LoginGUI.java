@@ -87,6 +87,27 @@ public class LoginGUI {
 				String password = txtPassword.getText();	//Receives input for password
 				
 				User u = new User(email, password);			//Passes entered data as arguments into User Constructor
+				int userID = u.getUserID();
+				boolean loggedIn = u.getLoggedIn();
+				
+			if(loggedIn == true){	
+				Thread t = new Thread("gameLaunchThread"){
+					public void run(){
+						
+						Game g = new Game(userID);
+						g.gameLoop();
+					}
+				};
+				
+				t.start();
+				ScoreTracker tracker = new ScoreTracker(u);
+				
+				
+			}	
+				System.out.println(u.getFirstName());
+				System.out.println(u.getUserID());
+				System.out.println(u.getLastName());
+				
 			}
 		});
 		btnLogin.setBounds(175, 200, 100, 29);
